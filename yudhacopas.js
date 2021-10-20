@@ -5,6 +5,10 @@ const figlet = require('figlet')
 const { uncache, nocache } = require('./lib/loader')
 const setting = JSON.parse(fs.readFileSync('./setting.json'))
 const welcome = require('./message/group')
+let express = require('express');
+let path = require('path');
+let app = new express();
+let PORT = process.env.PORT || 3000;
 baterai = 'unknown'
 charging = 'unknown'
 
@@ -122,7 +126,11 @@ const spinner = {
 
 	dha.on('chat-update', async (message) => {
 		require('./dha.js')(dha, message)
+	
 	})
 }
+
+app.listen(PORT, () => console.log('App listened on port', PORT))
+
 
 starts()
